@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">QRAndroid</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="account">账号</string>
+    <string name="pwd">密码</string>
+    <string name="phone">电话</string>
+    <string name="submit">提交</string>
+    <string name="name">名字</string>
+</resources>
