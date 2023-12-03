@@ -38,23 +38,20 @@ public class HomeActivity extends AppCompatActivity {
 
         //更改fragment处的页面(主页、我的)
         mBottomNavigationView = findViewById(R.id.bottom_menu);
-        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.item_homepage:
-                        mfragment = new HomePageFragment();
-                        break;
-                    case R.id.item_me:
-                        mfragment = new MeFragment();
-                        break;
-                }
-
-                mFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_homepage, mfragment)
-                        .commit();
-                return true;
+        mBottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.item_homepage:
+                    mfragment = new HomePageFragment();
+                    break;
+                case R.id.item_me:
+                    mfragment = new MeFragment();
+                    break;
             }
+
+            mFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_homepage, mfragment)
+                    .commit();
+            return true;
         });
 
     }
