@@ -23,6 +23,7 @@ import util.StringUtil;
 
 
 public class LoginFragment extends Fragment {
+    private static final String ip = "192.168.185.235";
     private static final String TAG = "LoginFragment";
     private EditText mEditTextId;
     private EditText mEditTextPassword;
@@ -90,7 +91,7 @@ public class LoginFragment extends Fragment {
 
     private void openApp(){
         // 通过调用MainMicroblogActivity的newIntent函数转换到MainMicroblogActivity页面
-        Intent intent = MainMicroblogActivity.newIntent(getActivity());
+        Intent intent = HomeActivity.newIntent(getActivity());
         // 改变了MyUserInfo的ID
         /*
         MyUserInfo.get()返回自身实例，并且创建User和博客列表
@@ -105,7 +106,7 @@ public class LoginFragment extends Fragment {
     //检查账户与密码
     public void checkPassword(String id,String password) {
         // 请求路径和携带的信息
-        String path = "http://192.168.185.235:8080/server_war_exploded/login?courier_id=" + id + "&password=" + password;
+        String path = "http://"+ip+":8080/server_war_exploded/login?courier_id=" + id + "&password=" + password;
         try {
             //字符串变成URL
             URL url = new URL(path);

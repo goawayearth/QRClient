@@ -22,6 +22,7 @@ import java.net.URL;
 import util.StringUtil;
 
 public class RegisterFragment extends Fragment {
+    private static final String ip = "192.168.185.235";
     private static final String TAG = "RegisterFragment";
     private EditText mEditTextRegisterNickName;
     private EditText mEditTextRegisterPassword;
@@ -91,7 +92,7 @@ public class RegisterFragment extends Fragment {
 
     public void createUser(String id,String name,String pwd,String phone){
 //        请求路径以及携带的信息
-        String path = "http://192.168.185.235:8080/server_war_exploded/register?courier_id=" + id + "&name=" + name+"&password="+pwd + "&mobile="+phone;
+        String path = "http://"+ip+":8080/server_war_exploded/register?courier_id=" + id + "&name=" + name+"&password="+pwd + "&mobile="+phone;
         try {
             // 创建URL
             URL url = new URL(path);
