@@ -91,7 +91,7 @@ public class RegisterFragment extends Fragment {
 
     public void createUser(String id,String name,String pwd,String phone){
 //        请求路径以及携带的信息
-        String path = "http://192.168.207.235:8080/server_war_exploded/register?courier_id=" + id + "&name=" + name+"&password="+pwd + "&mobile="+phone;
+        String path = "http://192.168.185.235:8080/server_war_exploded/register?courier_id=" + id + "&name=" + name+"&password="+pwd + "&mobile="+phone;
         try {
             // 创建URL
             URL url = new URL(path);

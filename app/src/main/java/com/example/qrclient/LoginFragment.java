@@ -105,7 +105,7 @@ public class LoginFragment extends Fragment {
     //检查账户与密码
     public void checkPassword(String id,String password) {
         // 请求路径和携带的信息
-        String path = "http://192.168.207.235:8080/server_war_exploded/login?courier_id=" + id + "&password=" + password;
+        String path = "http://192.168.185.235:8080/server_war_exploded/login?courier_id=" + id + "&password=" + password;
         try {
             //字符串变成URL
             URL url = new URL(path);
