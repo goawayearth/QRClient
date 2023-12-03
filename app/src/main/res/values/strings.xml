@@ -7,4 +7,11 @@
     <string name="phone">电话</string>
     <string name="submit">提交</string>
     <string name="name">名字</string>
+    <string name="home">主页</string>
+    <string name="my">我</string>
+    <string name="task">任务</string>
+    <string name="over">已完成：</string>
+    <string name="unover">未完成：</string>
+    <string name="task_btn">查看任务</string>
+
 </resources>

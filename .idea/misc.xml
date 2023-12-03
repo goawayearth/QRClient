@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.198" />
+        <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/drawable/ic_me.xml" value="0.198" />
+        <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/activity_home.xml" value="0.23369565217391305" />
+        <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/activity_main_microblog.xml" value="0.23369565217391305" />
+        <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/fragment_home_page.xml" value="0.24947916666666667" />
+        <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/fragment_me.xml" value="0.23369565217391305" />
+        <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/menu/man_menu.xml" value="0.24947916666666667" />
         <entry key="..\:/STUDY/1Android/QRAndroid/app/src/main/res/layout/activity_login_fragment.xml" value="0.176" />
         <entry key="..\:/STUDY/1Android/QRAndroid/app/src/main/res/layout/activity_main_microblog.xml" value="0.24947916666666667" />
         <entry key="..\:/STUDY/1Android/QRAndroid/app/src/main/res/layout/activity_register.xml" value="0.24947916666666667" />
