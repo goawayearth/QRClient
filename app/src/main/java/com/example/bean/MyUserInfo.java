@@ -13,13 +13,13 @@ public class MyUserInfo {
     一个包含用户信息和这个用户所有的博客的人
     */
     private static MyUserInfo sMyUserInfo;
-    private User myUser;
+    private Courier myUser;
 
     /*
     构造函数是对用户信息和博客列表进行初始化
      */
     private MyUserInfo(){
-        myUser = new User();
+        myUser = new Courier();
     }
 
     /*
@@ -32,7 +32,7 @@ public class MyUserInfo {
         return sMyUserInfo;
     }
 
-    public User getMyUser(){
+    public Courier getMyUser(){
         return myUser;
     }
 

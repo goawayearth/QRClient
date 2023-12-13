@@ -8,6 +8,23 @@
         android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="60dp"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:textSize="18sp"
+        android:layout_height="wrap_content"
+        android:text="二维码内容" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="40dp"
+        android:text="任务完成"/>
+
 </LinearLayout>

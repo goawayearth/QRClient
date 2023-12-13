@@ -15,4 +15,5 @@
     <string name="task_btn">查看任务</string>
     <string name="view">查看任务</string>
     <string name="finish">完成配送</string>
+    <string name="logout">注销</string>
 </resources>

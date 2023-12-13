@@ -85,7 +85,7 @@ public class HomePageFragment extends Fragment {
 
             List<String> list = new ArrayList<String>();
             try {
-                String path = "http://"+ip+":8080/server_war_exploded/getQR?courier_id="+ MyUserInfo.get().getMyUser().getId();
+                String path = "http://"+ip+":8080/server_war_exploded/getQR?courier_id="+ MyUserInfo.get().getMyUser().getCourier_id();
                 URL url = new URL(path);
 
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();

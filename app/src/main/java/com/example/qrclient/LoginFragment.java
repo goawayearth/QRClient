@@ -101,7 +101,7 @@ public class LoginFragment extends Fragment {
         然后用这个实例将登陆时填写的用户名记录下来
         最后，转换页面
         */
-        MyUserInfo.get().getMyUser().setId(mId);
+        MyUserInfo.get().getMyUser().setCourier_id(mId);
         startActivity(intent);
     }
 

@@ -13,19 +13,20 @@
         android:layout_marginTop="30dp">
 
         <TextView
+            android:id="@+id/me_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/account"
             android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:textSize="24sp"/>
 
         <TextView
             android:id="@+id/me_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:text="用户名"
+            android:textSize="18sp"
+            android:textColor="@color/menu_background_color"
+            android:text="id"
             android:layout_marginBottom="20dp"/>
     </LinearLayout>
 
@@ -42,15 +43,9 @@
             android:textSize="20sp"
             android:layout_marginBottom="5dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/over"
-            android:textColor="@color/black"
-            android:textSize="17sp"
-            android:layout_marginBottom="5dp"/>
 
         <TextView
+            android:id="@+id/task_num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/unover"
