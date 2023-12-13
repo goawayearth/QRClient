@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.bean.MyUserInfo;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,7 +25,7 @@ import util.StringUtil;
 
 
 public class LoginFragment extends Fragment {
-    private static final String ip = "192.168.164.235";
+    private static final String ip = "192.168.117.235";
     private static final String TAG = "LoginFragment";
     private EditText mEditTextId;
     private EditText mEditTextPassword;
@@ -99,7 +101,7 @@ public class LoginFragment extends Fragment {
         然后用这个实例将登陆时填写的用户名记录下来
         最后，转换页面
         */
-//        MyUserInfo.get().getMyUser().setId(mId);
+        MyUserInfo.get().getMyUser().setId(mId);
         startActivity(intent);
     }
 

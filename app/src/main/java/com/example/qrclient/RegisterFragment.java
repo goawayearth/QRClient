@@ -22,7 +22,7 @@ import java.net.URL;
 import util.StringUtil;
 
 public class RegisterFragment extends Fragment {
-    private static final String ip = "192.168.164.235";
+    private static final String ip = "192.168.117.235";
     private static final String TAG = "RegisterFragment";
     private EditText mEditTextRegisterNickName;
     private EditText mEditTextRegisterPassword;

@@ -1,64 +1,240 @@
 package com.example.qrclient;
 
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomePageFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.example.bean.MyUserInfo;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class HomePageFragment extends Fragment {
+    static String ip = "192.168.117.235";
+    private static final String TAG = "HomePageFragment";
+    /*
+    类似于滚动窗口
+    */
+    private RecyclerView mRecyclerView;
+    /*
+    存储微博的列表
+    */
+    private List<String> express_num;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public HomePageFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomePageFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomePageFragment newInstance(String param1, String param2) {
-        HomePageFragment fragment = new HomePageFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(false);
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.fragment_home_page, container, false);
+        getActivity().setTitle("主页");
+        //承载微博的容器
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.homepage);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        return view;
+    }
+
+    //程序正常启动：onCreate()->onStart()->onResume();
+    //正常退出：onPause()->onStop()->onDestory()
+    @Override
+    public void onResume() {
+        super.onResume();
+        new FetchBlogTask().execute();
+    }
+
+
+
+    //异步的从微博的数据库里取出所有的微博数据，并且将它转化为Microblog的形式
+    private class FetchBlogTask extends AsyncTask<Void,Void,List<String>> {
+        @Override
+        protected List<String> doInBackground(Void... voids) {
+
+            List<String> list = new ArrayList<String>();
+            try {
+                String path = "http://"+ip+":8080/server_war_exploded/getQR?courier_id="+ MyUserInfo.get().getMyUser().getId();
+                URL url = new URL(path);
+
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");//获取服务器数据
+                connection.setReadTimeout(10000);//设置读取超时的毫秒数
+                connection.setConnectTimeout(10000);//设置连接超时的毫秒数
+
+                if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+                    InputStream in = connection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                    String result = reader.readLine();//读取服务器进行逻辑处理后页面显示的数据
+                    JSONArray array = JSON.parseArray(result);
+                    Log.i(TAG,""+array);
+
+                    //将JSON数组转
+                    for(int i=0;i<array.size();i++){
+                        JSONObject object = array.getJSONObject(i);
+                        list.add(JSON.parseObject(JSON.toJSONString(object),String.class));
+                    }
+
+                }else{
+                    Log.i(TAG,"访问服务器失败");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            };
+            return list;
+        }
+
+        // 后台加载完成后，执行函数将数据传递给MicroblogAdapter
+        @Override
+        protected void onPostExecute(List<String> list) {
+            express_num = list;
+            /*
+            Adapter用于将数据转化成视图并显示在控件上
+             */
+            mRecyclerView.setAdapter(new MicroblogAdapter(express_num));
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_page, container, false);
+
+
+    /*
+    适配器类
+    */
+    private class MicroblogAdapter extends RecyclerView.Adapter<MicroblogHolder>{
+
+        public MicroblogAdapter(List<String> microblogs){
+            express_num = microblogs;
+        }
+
+        @NonNull
+        @Override
+        public MicroblogHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+
+            return new MicroblogHolder(layoutInflater, parent);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MicroblogHolder holder, int position) {
+            String num = express_num.get(position);
+            holder.bind(num);
+        }
+
+        @Override
+        public int getItemCount() {
+            return express_num.size();
+        }
     }
+
+
+
+    // holder用户微博内容
+    private class MicroblogHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        private Button button_view = null;
+        private Button button_finish = null;
+        private ImageView imageView = null;
+        private String num;
+
+        /*
+        每个微博内容的结构类
+        */
+        @SuppressLint("CutPasteId")
+        public MicroblogHolder(LayoutInflater inflater, ViewGroup parent){
+            // 微博列表
+            super(inflater.inflate(R.layout.list_tast,parent,false));
+            itemView.setOnClickListener(this);
+            imageView = itemView.findViewById(R.id.imageView);
+            button_view = itemView.findViewById(R.id.btn_task_over);
+            button_finish = itemView.findViewById(R.id.btn_task_over);
+        }
+
+        public void bind(String num1) {
+            //首先下载图片，然后将图片放在view上
+            loadImage(num1);
+
+        }
+
+        private void loadImage(String dir) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        URL url = new URL("http://"+ip+":8080/server_war_exploded/"+dir+".png");
+                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                        showQrCode(bitmap);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+
+        private void showQrCode(Bitmap bitmap) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (bitmap != null) {
+                        imageView.setImageBitmap(bitmap);
+
+                        String result = QrCodeScanner.scanQrCode(bitmap);
+                        if (result != null) {
+//                            textView.setText("Result: " + result);
+                        } else {
+//                            textView.setText("QR code not detected");
+                        }
+                    }
+                }
+            });
+        }
+
+        @SuppressLint("NonConstantResourceId")
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.btn_task_view:{
+                    Intent intent = null;
+                    intent = ViewQR.newIntent(getActivity(),num);
+                    startActivity(intent);
+                    break;
+                }
+                case R.id.btn_task_over:{
+                    //删除任务
+                    //刷新页面
+                }
+            }
+
+        }
+    }
+
+
 }

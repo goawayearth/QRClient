@@ -13,5 +13,6 @@
     <string name="over">已完成：</string>
     <string name="unover">未完成：</string>
     <string name="task_btn">查看任务</string>
-
+    <string name="view">查看任务</string>
+    <string name="finish">完成配送</string>
 </resources>
