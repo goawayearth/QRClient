@@ -2,6 +2,7 @@ package com.example.qrclient;
 
 
 import android.annotation.SuppressLint;
+import android.app.AppComponentFactory;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -100,8 +102,8 @@ public class HomePageFragment extends Fragment {
 
                     //将JSON数组转
                     for(int i=0;i<array.size();i++){
-                        JSONObject object = array.getJSONObject(i);
-                        list.add(JSON.parseObject(JSON.toJSONString(object),String.class));
+                        list.add(array.getString(i));
+                        Log.i(TAG,"%%%%%%%%%%"+list.get(i));
                     }
 
                 }else{
@@ -159,82 +161,33 @@ public class HomePageFragment extends Fragment {
 
     // holder用户微博内容
     private class MicroblogHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-
-        private Button button_view = null;
-        private Button button_finish = null;
-        private ImageView imageView = null;
-        private String num;
-
+        String num = null;
+        private TextView textView = null;
         /*
         每个微博内容的结构类
         */
-        @SuppressLint("CutPasteId")
         public MicroblogHolder(LayoutInflater inflater, ViewGroup parent){
             // 微博列表
             super(inflater.inflate(R.layout.list_tast,parent,false));
             itemView.setOnClickListener(this);
-            imageView = itemView.findViewById(R.id.imageView);
-            button_view = itemView.findViewById(R.id.btn_task_over);
-            button_finish = itemView.findViewById(R.id.btn_task_over);
+            textView = itemView.findViewById(R.id.btn_task);
         }
 
         public void bind(String num1) {
             //首先下载图片，然后将图片放在view上
-            loadImage(num1);
-
+            num = num1;
+            String text = "任务："+num1;
+            textView.setText(text);
         }
 
-        private void loadImage(String dir) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        URL url = new URL("http://"+ip+":8080/server_war_exploded/"+dir+".png");
-                        Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                        showQrCode(bitmap);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-        }
 
-        private void showQrCode(Bitmap bitmap) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    if (bitmap != null) {
-                        imageView.setImageBitmap(bitmap);
-
-                        String result = QrCodeScanner.scanQrCode(bitmap);
-                        if (result != null) {
-//                            textView.setText("Result: " + result);
-                        } else {
-//                            textView.setText("QR code not detected");
-                        }
-                    }
-                }
-            });
-        }
-
-        @SuppressLint("NonConstantResourceId")
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.btn_task_view:{
-                    Intent intent = null;
-                    intent = ViewQR.newIntent(getActivity(),num);
-                    startActivity(intent);
-                    break;
-                }
-                case R.id.btn_task_over:{
-                    //删除任务
-                    //刷新页面
-                }
-            }
-
+            Log.i(TAG, "点击了");
+            Intent intent = null;
+            intent = ViewQR.newIntent(getActivity(), num);
+            startActivity(intent);
         }
+
     }
-
-
 }

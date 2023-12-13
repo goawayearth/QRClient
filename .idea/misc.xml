@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/drawable/button_background.xml" value="0.1825" />
         <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.198" />
         <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/drawable/ic_me.xml" value="0.198" />
         <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/activity_home.xml" value="0.23369565217391305" />
         <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/activity_login_fragment.xml" value="0.24947916666666667" />
+        <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/activity_main.xml" value="0.23020833333333332" />
         <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/activity_main_microblog.xml" value="0.23369565217391305" />
         <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/activity_register_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/STUDY/1Android/QRA/QRAndroid/app/src/main/res/layout/activity_view_qr.xml" value="0.24947916666666667" />
