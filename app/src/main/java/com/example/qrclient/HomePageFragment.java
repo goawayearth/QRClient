@@ -41,7 +41,7 @@ import java.util.List;
 
 
 public class HomePageFragment extends Fragment {
-    static String ip = "192.168.117.235";
+    static String ip = "192.168.221.235";
     private static final String TAG = "HomePageFragment";
     /*
     类似于滚动窗口
@@ -55,7 +55,7 @@ public class HomePageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(false);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -67,6 +67,31 @@ public class HomePageFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.scanner,menu);  //新建微博
+    }
+
+    // 点击微博之后
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item ){
+        switch(item.getItemId()){
+            /*
+            监听到右上角的加号被点击之后，通过WriteMicroblogActivity的bewIntent函数实现页面跳转功能
+            */
+            case R.id.item_add_microblog:
+                Log.i(TAG,"点击了");
+                Intent intent = ScannerQR.newIntent(getActivity());
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     //程序正常启动：onCreate()->onStart()->onResume();
     //正常退出：onPause()->onStop()->onDestory()

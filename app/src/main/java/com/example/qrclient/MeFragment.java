@@ -28,7 +28,7 @@ import java.net.URL;
 
 
 public class MeFragment extends Fragment  implements View.OnClickListener{
-    private static final String ip = "192.168.117.235";
+    private static final String ip = "192.168.221.235";
     private static final String TAG = "MeFragment";
     private TextView mMeId = null;
     private TextView mMeName = null;
@@ -121,8 +121,9 @@ public class MeFragment extends Fragment  implements View.OnClickListener{
             // 给界面各个元素赋值
             String name = user.getName();
             mMeName.setText(name);
-            String num = user.getMobile();
-            task_num.setText(num);
+            int num = user.getNum();
+            String text = "未完成："+num;
+            task_num.setText(text);
         }
     }
 }

@@ -5,6 +5,15 @@ public class Courier {
     private String name = null;
     private String mobile = null;
     private String password = null;
+    private int num = 0;
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public int getNum() {
+        return num;
+    }
 
     public String getCourier_id(){
         return courier_id;

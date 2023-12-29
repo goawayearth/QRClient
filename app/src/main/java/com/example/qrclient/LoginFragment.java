@@ -25,7 +25,7 @@ import util.StringUtil;
 
 
 public class LoginFragment extends Fragment {
-    private static final String ip = "192.168.117.235";
+    private static final String ip = "192.168.221.235";
     private static final String TAG = "LoginFragment";
     private EditText mEditTextId;
     private EditText mEditTextPassword;

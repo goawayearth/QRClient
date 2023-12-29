@@ -22,7 +22,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 public class ViewQR extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String ip = "192.168.117.235";
+    private static final String ip = "1192.168.221.235";
     private static final String EXTRA_NUM = "express_num";
     private String content = null;
     private String express_num = null;
