@@ -28,7 +28,8 @@ import java.net.URL;
 
 
 public class MeFragment extends Fragment  implements View.OnClickListener{
-    private static final String ip = "192.168.221.235";
+//    private static final String ip = "192.168.221.235";
+    static String ip = GetIP.ip;
     private static final String TAG = "MeFragment";
     private TextView mMeId = null;
     private TextView mMeName = null;

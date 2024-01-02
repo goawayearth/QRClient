@@ -41,7 +41,8 @@ import java.util.List;
 
 
 public class HomePageFragment extends Fragment {
-    static String ip = "192.168.221.235";
+//    static String ip = "192.168.221.235";
+    static String ip = GetIP.ip;
     private static final String TAG = "HomePageFragment";
     /*
     类似于滚动窗口
